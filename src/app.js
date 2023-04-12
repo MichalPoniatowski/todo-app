@@ -54,7 +54,7 @@ const renderTodo = () => {
             <div class="flex flex-col py-4 w-[80%]">
             ${
               task.isEditing
-                ? `<input id="confirm-btn-${task.id}" type="text" value=${task.text} id="disabled-input" aria-label="Rewrite" class="font-semibold mb-auto bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>`
+                ? `<input id="confirm-btn-${task.id}" value=${task.text} class="font-semibold mb-auto bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">`
                 : `<dd class="text-lg font-semibold">${task.text}</dd>`
             }
                
@@ -81,6 +81,7 @@ const renderTodo = () => {
   allTodoEditEls.forEach((node) => {
     node.addEventListener("click", () => {
       onEditMode(parseInt(node.dataset.taskId));
+      console.log(parseInt(node.dataset.taskId));
       renderTodo();
     });
   });
@@ -90,7 +91,7 @@ const renderTodo = () => {
       const taskId = parseInt(node.dataset.taskId);
       const newText = document.getElementById(`confirm-btn-${taskId}`).value;
 
-      editTask(parseInt(taskId, newText));
+      editTask(taskId, newText);
       renderTodo();
     });
   });
@@ -134,10 +135,10 @@ const onEditMode = (id) => {
 };
 
 addTask("testujemy dodawanie");
-editTask({
-  id: 2,
-  text: "task EDIT",
-  completed: true,
-});
+// editTask({
+//   id: 2,
+//   text: "task EDIT",
+//   completed: true,
+// });
 
 renderTodo();
