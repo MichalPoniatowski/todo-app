@@ -10,38 +10,13 @@ const todoAddBtnEl = document.getElementById("todo-add-btn");
 const inputEl = document.getElementById("todo-input");
 
 todoAddBtnEl.addEventListener("click", () => {
-  //   console.log(inputEl.value);
   addTask(inputEl.value);
   inputEl.value = "";
   renderTodo();
 });
 
-const tasks = [
-  {
-    id: 0,
-    text: "Test #1",
-    completed: false,
-    isEditing: false,
-  },
-  {
-    id: 1,
-    text: "Test #2",
-    completed: false,
-    isEditing: false,
-  },
-  {
-    id: 2,
-    text: "Test #3",
-    completed: false,
-    isEditing: false,
-  },
-  {
-    id: 3,
-    text: "Test #4",
-    completed: false,
-    isEditing: false,
-  },
-];
+const dataFromLocalStorage = localStorage.getItem("todos");
+const tasks = dataFromLocalStorage ? JSON.parse(dataFromLocalStorage) : [];
 
 const renderTodo = () => {
   todoListEl.innerHTML = tasks
@@ -95,7 +70,11 @@ const renderTodo = () => {
       renderTodo();
     });
   });
+
+  localStorage.setItem("todos", JSON.stringify(tasks));
 };
+
+renderTodo();
 
 const addTask = (text) => {
   tasks.unshift({
@@ -107,13 +86,8 @@ const addTask = (text) => {
 };
 
 const deleteTask = (id) => {
-  // console.log("id", id);
   const index = tasks.findIndex((task) => task.id === id);
-  // console.log("index", index);
-
-  // console.log("tasks before", tasks);
   tasks.splice(index, 1);
-  // console.log("tasks after", tasks);
 };
 
 const editTask = (id, text) => {
@@ -134,11 +108,11 @@ const onEditMode = (id) => {
   };
 };
 
-addTask("testujemy dodawanie");
-// editTask({
-//   id: 2,
-//   text: "task EDIT",
-//   completed: true,
-// });
+// addTask("testujemy dodawanie");
+// // editTask({
+// //   id: 2,
+// //   text: "task EDIT",
+// //   completed: true,
+// // });
 
-renderTodo();
+// renderTodo();

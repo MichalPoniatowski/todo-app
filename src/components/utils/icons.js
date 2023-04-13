@@ -15,7 +15,7 @@ const checkIcon = `<svg
 
 const getConfirmIcon = (id) => `<svg
   class="todo-confirm-icon flex-shrink-0 w-8 h-8 text-green-500 dark:text-green-400 hover:cursor-pointer border-2 border-transparent hover:border-green-600 rounded-lg"
-  data-confirm-id=${id}
+  data-task-id=${id}
   fill="currentColor"
   viewBox="0 0 20 20"
   xmlns="http://www.w3.org/2000/svg"
